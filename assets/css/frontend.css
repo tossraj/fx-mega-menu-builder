@@ -1,0 +1,301 @@
+/* ================================================================
+   Mega Menu Builder — Frontend Styles
+   Bootstrap Icons + Custom Mega Menu Panel
+================================================================ */
+
+/* ── Top-level item with mega menu ── */
+.mmb-has-mega-menu {
+  position: relative;
+}
+
+.mmb-link-wrap {
+  display: inline-flex;
+  align-items: center;
+}
+
+
+.mmb-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.mmb-arrow {
+  font-size: 11px;
+  transition: transform .25s ease;
+}
+
+.mmb-has-mega-menu:hover .mmb-arrow,
+.mmb-has-mega-menu.mmb-open .mmb-arrow {
+  transform: rotate(180deg);
+}
+
+/* ── Mega Panel ── */
+.mmb-mega-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 9999;
+  min-width: 600px;
+  width: 100%;
+  max-width: var(--mmb-max-width, 100%);
+  background: var(--mmb-bg, #ffffff);
+  box-shadow: 0 12px 40px rgba(0,0,0,.18);
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,.08);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .2s ease, transform .2s ease, visibility .2s;
+  transform: translateY(8px);
+  pointer-events: none;
+}
+
+.mmb-has-mega-menu:hover .mmb-mega-panel,
+.mmb-has-mega-menu.mmb-open .mmb-mega-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* ── Animations ── */
+.mmb-anim-slide {
+  transform: translateY(-10px);
+}
+.mmb-has-mega-menu:hover .mmb-anim-slide,
+.mmb-has-mega-menu.mmb-open .mmb-anim-slide {
+  transform: translateY(0);
+}
+
+.mmb-anim-zoom {
+  transform: scale(.96) translateY(8px);
+}
+.mmb-has-mega-menu:hover .mmb-anim-zoom,
+.mmb-has-mega-menu.mmb-open .mmb-anim-zoom {
+  transform: scale(1) translateY(0);
+}
+
+.mmb-anim-none {
+  transition: none;
+}
+
+/* ── Panel Inner Grid ── */
+.mmb-panel-inner {
+  display: grid;
+  padding: 20px;
+  gap: 20px;
+}
+
+/* ── Column ── */
+
+.mmb-col-heading {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #999;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.mmb-col-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* ── Item ── */
+
+.mmb-item-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  border-radius: 7px;
+  transition: background .15s ease;
+}
+
+.mmb-item-link:hover {
+  background: rgba(0,0,0,.05);
+}
+
+.mmb-item-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.mmb-item-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.mmb-item-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  opacity: .75;
+  transition: opacity .15s;
+}
+
+.mmb-item-link:hover .mmb-item-icon {
+  opacity: 1;
+}
+
+.mmb-item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.mmb-item-label {
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mmb-item-desc {
+  font-size: 12px;
+  color: #888;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mmb-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 7px;
+  border-radius: 100px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+/* Header container as relative context for full width panels */
+.site-header-row-container-inner .site-container {
+  position: relative;
+}
+
+@media (min-width: 992px) {
+  /* Remove intermediate positioning context for full-width panels on desktop */
+  .site-header-main-section-right,
+  .site-header-item-main-navigation,
+  .main-navigation,
+  .primary-menu-container,
+  ul.menu {
+    position: static !important;
+  }
+}
+
+/* ── Position: Left (Default) ── */
+.mmb-has-mega-menu.mmb-position-left {
+  position: relative;
+}
+.mmb-position-left .mmb-mega-panel {
+  left: 0;
+  right: auto;
+}
+
+/* ── Position: Right ── */
+.mmb-has-mega-menu.mmb-position-right {
+  position: relative;
+}
+.mmb-position-right .mmb-mega-panel {
+  left: auto;
+  right: 0;
+}
+
+/* ── Position: Center ── */
+.mmb-has-mega-menu.mmb-position-center {
+  position: relative;
+}
+.mmb-position-center .mmb-mega-panel {
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%) translateY(8px);
+}
+.mmb-has-mega-menu.mmb-position-center:hover .mmb-mega-panel,
+.mmb-has-mega-menu.mmb-position-center.mmb-open .mmb-mega-panel {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── Position: Full Width (Contained) ── */
+.mmb-has-mega-menu.mmb-position-full {
+  position: static !important;
+}
+.mmb-position-full .mmb-mega-panel {
+  left: 0;
+  right: 0;
+  width: 100%;
+  position: absolute;
+}
+
+/* ── Responsive ── */
+@media (max-width: 991px) {
+  .mmb-panel-inner {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .mmb-mega-panel {
+    display: none;
+    position: static !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    box-shadow: none;
+    border-radius: 0;
+    border: none;
+    min-width: unset;
+    width: 100% !important;
+    background: var(--mmb-bg-phone, #ffffff) !important;
+  }
+  
+  .mmb-has-mega-menu.mmb-open .mmb-mega-panel {
+    display: block;
+  }
+
+  .mmb-panel-inner {
+    grid-template-columns: 1fr !important;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .mmb-link-wrap {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    background: var(--mmb-link-bg-phone, transparent) !important;
+  }
+
+  .mmb-top-link {
+    display: flex !important;
+    align-items: center !important;
+    flex: 1 !important;
+    width: auto !important;
+  }
+}

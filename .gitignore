@@ -1,0 +1,29 @@
+# Dependency directories
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Build files (optional to ignore, but we keep compiled assets in build/ in git for WP distribution)
+# If you only want source files in git and compile on deploy, uncomment below:
+# build/
+
+# Source files
+src/
