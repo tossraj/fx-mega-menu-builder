@@ -2,17 +2,19 @@
 Contributors: tossraj
 Tags: mega menu, menu builder, nav menu, custom menu, navigation
 Requires at least: 5.6
-Tested up to: 6.5
+Tested up to: 7.0
 Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 A React-powered drag-and-drop Visual Editor to easily design custom WordPress mega menus.
 
-[![WordPress Plugin](https://img.shields.io/badge/WordPress-Plugin-blue.svg)](https://wordpress.org/plugins/)
-[![GPLv2 Licensed](https://img.shields.io/badge/License-GPL%20v2%20or%20later-orange.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
+== Description ==
 
 A powerful, user-friendly WordPress plugin that enables you to design and display custom mega menus using a modern drag-and-drop Visual Editor built on React. Easily construct column layouts, import menus/pages, and style custom menus with background colors and link configurations tailored for desktop and mobile viewports.
+
+[![WordPress Plugin](https://img.shields.io/badge/WordPress-Plugin-blue.svg)](https://wordpress.org/plugins/)
+[![GPLv2 Licensed](https://img.shields.io/badge/License-GPL%20v2%20or%20later-orange.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 
 ---
 
