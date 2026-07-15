@@ -1,13 +1,13 @@
 <?php
 /**
- * Plugin Name: Mega Menu Builder
- * Plugin URI:  https://github.com/tossraj/mega-menu-builder
+ * Plugin Name: FX Mega Menu Builder
+ * Plugin URI:  https://github.com/tossraj/fx-mega-menu-builder
  * Description: A powerful mega menu builder with React-based visual editor, column layouts, Bootstrap Icons, AJAX search, and image support.
  * Version:     1.0.1
  * Author:      Shiv Singh
  * Author URI:  https://github.com/tossraj
  * License:     GPL-2.0+
- * Text Domain: mega-menu-builder
+ * Text Domain: fx-mega-menu-builder
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;

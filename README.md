@@ -1,4 +1,4 @@
-=== Mega Menu Builder ===
+=== FX Mega Menu Builder ===
 Contributors: tossraj
 Tags: mega menu, menu builder, nav menu, custom menu, navigation
 Requires at least: 5.6
@@ -45,7 +45,7 @@ A powerful, user-friendly WordPress plugin that enables you to design and displa
 
 ## Database Settings Structure
 
-Mega Menu Builder stores configuration objects in the `mmb_menus` option key in the `wp_options` table. Supported settings keys are:
+FX Mega Menu Builder stores configuration objects in the `mmb_menus` option key in the `wp_options` table. Supported settings keys are:
 - `width`: Max-width (e.g. `100%`, `1200px`, `container`).
 - `background`: Desktop background color (hex string).
 - `mobileBackground`: Mobile panel drawer background color (hex string).
