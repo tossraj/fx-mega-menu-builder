@@ -1,11 +1,11 @@
 /**
- * Mega Menu Builder — Frontend JavaScript
+ * Binrik Navigation Menu Designer — Frontend JavaScript
  * Handles hover/click trigger and mobile toggling
  */
 ( function () {
     'use strict';
 
-    const data = window.mmbFrontend || {};
+    const data = window.binrikNmdFrontend || {};
     const menus = data.menus || {};
 
     // Helper
@@ -19,44 +19,44 @@
 
     // Check if a nav item should open on click (showOnHover=false)
     function isClickTrigger( panelEl ) {
-        const li = closest( panelEl, '.mmb-has-mega-menu' );
+        const li = closest( panelEl, '.binrik-nmd-has-mega-menu' );
         if ( ! li ) return false;
         // Find linked menu config — check data attribute set by PHP or fall back
-        return li.dataset.mmbClick === '1';
+        return li.dataset.binrikNmdClick === '1';
     }
 
     function openMenu( li ) {
         closeAll();
-        li.classList.add( 'mmb-open' );
+        li.classList.add( 'binrik-nmd-open' );
     }
 
     function closeMenu( li ) {
-        li.classList.remove( 'mmb-open' );
+        li.classList.remove( 'binrik-nmd-open' );
     }
 
     function closeAll() {
-        document.querySelectorAll( '.mmb-has-mega-menu.mmb-open' ).forEach( el => {
-            el.classList.remove( 'mmb-open' );
-            const btn = el.querySelector( '.mmb-toggle-btn' );
+        document.querySelectorAll( '.binrik-nmd-has-mega-menu.binrik-nmd-open' ).forEach( el => {
+            el.classList.remove( 'binrik-nmd-open' );
+            const btn = el.querySelector( '.binrik-nmd-toggle-btn' );
             if ( btn ) btn.setAttribute( 'aria-expanded', 'false' );
         } );
     }
 
     document.addEventListener( 'DOMContentLoaded', function () {
-        const items = document.querySelectorAll( '.mmb-has-mega-menu' );
+        const items = document.querySelectorAll( '.binrik-nmd-has-mega-menu' );
 
         items.forEach( function ( li ) {
-            const panel = li.querySelector( '.mmb-mega-panel' );
+            const panel = li.querySelector( '.binrik-nmd-mega-panel' );
             if ( ! panel ) return;
 
             const clickMode = isClickTrigger( panel );
 
             if ( clickMode ) {
                 // ── Click mode ──
-                const link = li.querySelector( '.mmb-top-link' );
-                const arrow = li.querySelector( '.mmb-toggle-btn' );
+                const link = li.querySelector( '.binrik-nmd-top-link' );
+                const arrow = li.querySelector( '.binrik-nmd-toggle-btn' );
                 const toggle = function ( e ) {
-                    if ( ! li.classList.contains( 'mmb-open' ) ) {
+                    if ( ! li.classList.contains( 'binrik-nmd-open' ) ) {
                         e.preventDefault();
                         openMenu( li );
                     }
@@ -96,7 +96,7 @@
 
         // Close on outside click
         document.addEventListener( 'click', function ( e ) {
-            if ( ! closest( e.target, '.mmb-has-mega-menu' ) ) {
+            if ( ! closest( e.target, '.binrik-nmd-has-mega-menu' ) ) {
                 closeAll();
             }
         } );
@@ -112,17 +112,17 @@
         function handleMobile( mq ) {
             if ( mq.matches ) {
                 items.forEach( function ( li ) {
-                    li.classList.remove( 'mmb-open' );
-                    const arrow = li.querySelector( '.mmb-toggle-btn' );
-                    if ( arrow && ! arrow.dataset.mmbMobileBound ) {
-                        arrow.dataset.mmbMobileBound = '1';
+                    li.classList.remove( 'binrik-nmd-open' );
+                    const arrow = li.querySelector( '.binrik-nmd-toggle-btn' );
+                    if ( arrow && ! arrow.dataset.binrikNmdMobileBound ) {
+                        arrow.dataset.binrikNmdMobileBound = '1';
                         arrow.addEventListener( 'click', function ( e ) {
                             e.preventDefault();
                             e.stopPropagation();
-                            const isOpen = li.classList.contains( 'mmb-open' );
+                            const isOpen = li.classList.contains( 'binrik-nmd-open' );
                             closeAll();
                             if ( ! isOpen ) {
-                                li.classList.add( 'mmb-open' );
+                                li.classList.add( 'binrik-nmd-open' );
                                 arrow.setAttribute( 'aria-expanded', 'true' );
                             } else {
                                 arrow.setAttribute( 'aria-expanded', 'false' );

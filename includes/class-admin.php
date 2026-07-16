@@ -1,7 +1,7 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class MMB_Admin {
+class Binrik_NMD_Admin {
 
     public function __construct() {
         add_action( 'admin_menu',            [ $this, 'add_admin_menu' ] );
@@ -10,10 +10,10 @@ class MMB_Admin {
 
     public function add_admin_menu() {
         add_menu_page(
-            __( 'Mega Menu Builder', 'mega-menu-builder' ),
-            __( 'Mega Menu', 'mega-menu-builder' ),
+            __( 'Binrik Navigation Menu Designer', 'binrik-navigation-menu-designer' ),
+            __( 'Navigation Menu', 'binrik-navigation-menu-designer' ),
             'manage_options',
-            'mega-menu-builder',
+            'binrik-navigation-menu-designer',
             [ $this, 'render_admin_page' ],
             'dashicons-menu-alt3',
             30
@@ -21,48 +21,48 @@ class MMB_Admin {
     }
 
     public function render_admin_page() {
-        echo '<div id="mmb-root" class="mmb-admin-wrap"></div>';
+        echo '<div id="binrik-nmd-root" class="binrik-nmd-admin-wrap"></div>';
     }
 
     public function enqueue_scripts( $hook ) {
-        if ( 'toplevel_page_mega-menu-builder' !== $hook ) return;
+        if ( 'toplevel_page_binrik-navigation-menu-designer' !== $hook ) return;
 
         // Bootstrap Icons CSS (Local)
         wp_enqueue_style(
-            'bootstrap-icons',
-            MMB_PLUGIN_URL . 'assets/css/bootstrap-icons.min.css',
+            'binrik-nmd-bootstrap-icons',
+            BINRIK_NMD_PLUGIN_URL . 'assets/css/bootstrap-icons.min.css',
             [],
             '1.11.3'
         );
 
         // React App (self-contained webpack bundle)
         wp_enqueue_script(
-            'mmb-admin-script',
-            MMB_BUILD_URL . 'index.js',
+            'binrik-nmd-admin-script',
+            BINRIK_NMD_BUILD_URL . 'index.js',
             [],
-            MMB_VERSION,
+            BINRIK_NMD_VERSION,
             true
         );
 
         wp_enqueue_style(
-            'mmb-admin-style',
-            MMB_BUILD_URL . 'index.css',
-            [ 'bootstrap-icons' ],
-            MMB_VERSION
+            'binrik-nmd-admin-style',
+            BINRIK_NMD_BUILD_URL . 'index.css',
+            [ 'binrik-nmd-bootstrap-icons' ],
+            BINRIK_NMD_VERSION
         );
 
         // WordPress Media Library
         wp_enqueue_media();
 
         // Localize data passed to React
-        wp_localize_script( 'mmb-admin-script', 'mmbData', [
-            'apiUrl'       => esc_url( rest_url( 'mega-menu/v1' ) ),
+        wp_localize_script( 'binrik-nmd-admin-script', 'binrikNmdData', [
+            'apiUrl'       => esc_url( rest_url( 'binrik-nmd/v1' ) ),
             'nonce'        => wp_create_nonce( 'wp_rest' ),
             'adminUrl'     => esc_url( admin_url() ),
             'siteUrl'      => esc_url( get_site_url() ),
             'navMenus'     => $this->get_nav_menus(),
             'navLocations' => $this->get_nav_locations(),
-            'pluginUrl'    => MMB_PLUGIN_URL,
+            'pluginUrl'    => BINRIK_NMD_PLUGIN_URL,
         ] );
     }
 

@@ -1,12 +1,12 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class MMB_Walker extends Walker_Nav_Menu {
+class Binrik_NMD_Walker extends Walker_Nav_Menu {
 
     private $mega_menus = [];
 
     public function __construct() {
-        $this->mega_menus = get_option( 'mmb_menus', [] );
+        $this->mega_menus = get_option( 'binrik_nmd_menus', [] );
     }
 
     public function display_element( $element, &$children_elements, $max_depth, $depth, $args, &$output ) {
@@ -42,10 +42,10 @@ class MMB_Walker extends Walker_Nav_Menu {
 
         // Top-level item with mega menu
         $classes   = empty( $data_object->classes ) ? [] : (array) $data_object->classes;
-        $classes[] = 'mmb-has-mega-menu';
+        $classes[] = 'binrik-nmd-has-mega-menu';
         $settings  = $mega_cfg['settings'] ?? [];
         $pos       = esc_attr( $settings['position'] ?? 'left' );
-        $classes[] = 'mmb-position-' . $pos;
+        $classes[] = 'binrik-nmd-position-' . $pos;
         $class_str = implode( ' ', array_filter( array_map( 'esc_attr', $classes ) ) );
 
         $title = apply_filters( 'the_title', $data_object->title, $data_object->ID );
@@ -54,9 +54,9 @@ class MMB_Walker extends Walker_Nav_Menu {
         $mobile_link_bg = esc_attr( $settings['mobileLinkBackground'] ?? 'transparent' );
 
         $output .= '<li class="' . $class_str . '">';
-        $output .= '<div class="mmb-link-wrap" style="--mmb-link-bg-phone:' . $mobile_link_bg . ';">';
-        $output .= '<a href="' . $url . '" class="mmb-top-link">' . esc_html( $title ) . '</a>';
-        $output .= '<button class="mmb-toggle-btn" aria-expanded="false"><i class="bi bi-chevron-down mmb-arrow"></i></button>';
+        $output .= '<div class="binrik-nmd-link-wrap" style="--binrik-nmd-link-bg-phone:' . $mobile_link_bg . ';">';
+        $output .= '<a href="' . $url . '" class="binrik-nmd-top-link">' . esc_html( $title ) . '</a>';
+        $output .= '<button class="binrik-nmd-toggle-btn" aria-expanded="false"><i class="bi bi-chevron-down binrik-nmd-arrow"></i></button>';
         $output .= '</div>';
         $output .= $this->render_mega_panel( $mega_cfg );
     }
@@ -89,7 +89,7 @@ class MMB_Walker extends Walker_Nav_Menu {
         }
         ksort( $grouped_rows );
 
-        $html  = '<div class="mmb-mega-panel mmb-anim-' . $anim . '" style="--mmb-bg:' . $bg . '; --mmb-bg-phone:' . $mobile_bg . '; --mmb-max-width:' . $width . ';">';
+        $html  = '<div class="binrik-nmd-mega-panel binrik-nmd-anim-' . $anim . '" style="--binrik-nmd-bg:' . $bg . '; --binrik-nmd-bg-phone:' . $mobile_bg . '; --binrik-nmd-max-width:' . $width . ';">';
 
         foreach ( $grouped_rows as $row_cols ) {
             $col_widths = [];
@@ -106,14 +106,14 @@ class MMB_Walker extends Walker_Nav_Menu {
             }
             $grid_template = implode( ' ', $col_widths );
 
-            $html .= '<div class="mmb-panel-inner" style="grid-template-columns: ' . $grid_template . ';">';
+            $html .= '<div class="binrik-nmd-panel-inner" style="grid-template-columns: ' . $grid_template . ';">';
 
             foreach ( $row_cols as $col ) {
-                $html .= '<div class="mmb-column">';
+                $html .= '<div class="binrik-nmd-column">';
                 if ( ! empty( $col['heading'] ) ) {
-                    $html .= '<div class="mmb-col-heading">' . esc_html( $col['heading'] ) . '</div>';
+                    $html .= '<div class="binrik-nmd-col-heading">' . esc_html( $col['heading'] ) . '</div>';
                 }
-                $html .= '<ul class="mmb-col-items">';
+                $html .= '<ul class="binrik-nmd-col-items">';
                 foreach ( (array) $col['items'] as $item ) {
                     $html .= $this->render_item( $item );
                 }
@@ -136,18 +136,18 @@ class MMB_Walker extends Walker_Nav_Menu {
         $badge_clr = esc_attr( $item['badgeColor'] ?? '#dc3545' );
         $target    = ! empty( $item['openBlank'] ) ? ' target="_blank" rel="noopener noreferrer"' : '';
 
-        $html = '<li class="mmb-item">';
+        $html = '<li class="binrik-nmd-item">';
 
         $custom_html = $item['customHtml'] ?? '';
         if ( ! empty( $custom_html ) ) {
-            $html .= '<div class="mmb-item-custom-html">' . do_shortcode( wp_kses_post( $custom_html ) ) . '</div>';
+            $html .= '<div class="binrik-nmd-item-custom-html">' . do_shortcode( wp_kses_post( $custom_html ) ) . '</div>';
             $html .= '</li>';
             return $html;
         }
 
         $shortcode = $item['shortcode'] ?? '';
         if ( ! empty( $shortcode ) ) {
-            $html .= '<div class="mmb-item-shortcode">' . do_shortcode( $shortcode ) . '</div>';
+            $html .= '<div class="binrik-nmd-item-shortcode">' . do_shortcode( $shortcode ) . '</div>';
             $html .= '</li>';
             return $html;
         }
@@ -163,14 +163,14 @@ class MMB_Walker extends Walker_Nav_Menu {
                 $show_thumb   = ! empty( $item['showPageThumbnail'] );
                 $show_content = ! empty( $item['showPageContent'] );
 
-                $html .= '<div class="mmb-item-dynamic-content">';
+                $html .= '<div class="binrik-nmd-item-dynamic-content">';
                 
                 if ( $show_thumb && has_post_thumbnail( $post_obj->ID ) ) {
-                    $html .= '<div class="mmb-dynamic-thumb" style="margin-bottom:10px;">' . get_the_post_thumbnail( $post_obj->ID, 'medium' ) . '</div>';
+                    $html .= '<div class="binrik-nmd-dynamic-thumb" style="margin-bottom:10px;">' . get_the_post_thumbnail( $post_obj->ID, 'medium' ) . '</div>';
                 }
                 
                 if ( $show_title ) {
-                    $html .= '<h5 class="mmb-dynamic-title" style="margin:0 0 5px 0; font-size:14px; font-weight:600;"><a href="' . get_permalink( $post_obj ) . '">' . get_the_title( $post_obj ) . '</a></h5>';
+                    $html .= '<h5 class="binrik-nmd-dynamic-title" style="margin:0 0 5px 0; font-size:14px; font-weight:600;"><a href="' . get_permalink( $post_obj ) . '">' . get_the_title( $post_obj ) . '</a></h5>';
                 }
 
                 if ( $show_content ) {
@@ -185,19 +185,19 @@ class MMB_Walker extends Walker_Nav_Menu {
                         setup_postdata( $post );
                         
                         $content = apply_filters( 'the_content', get_post_field( 'post_content', $page_id ) );
-                        $html .= '<div class="mmb-dynamic-page-content">' . $content . '</div>';
+                        $html .= '<div class="binrik-nmd-dynamic-page-content">' . $content . '</div>';
                         
                         wp_reset_postdata();
                         $post = $backup_post;
                         unset( $rendering_content[ $page_id ] );
                     } else {
-                        $html .= '<div class="mmb-dynamic-page-content-loop-prevented">Circular content rendering prevented.</div>';
+                        $html .= '<div class="binrik-nmd-dynamic-page-content-loop-prevented">Circular content rendering prevented.</div>';
                     }
                 }
                 
                 if ( $show_excerpt && ! $show_content ) {
                     $excerpt = $post_obj->post_excerpt ?: wp_trim_words( $post_obj->post_content, 20 );
-                    $html .= '<div class="mmb-dynamic-excerpt" style="font-size:12px; color:#666; line-height:1.4;">' . esc_html( $excerpt ) . '</div>';
+                    $html .= '<div class="binrik-nmd-dynamic-excerpt" style="font-size:12px; color:#666; line-height:1.4;">' . esc_html( $excerpt ) . '</div>';
                 }
                 
                 $html .= '</div>';
@@ -206,7 +206,7 @@ class MMB_Walker extends Walker_Nav_Menu {
             return $html;
         }
 
-        $html .= '<a href="' . $url . '" class="mmb-item-link"' . $target . '>';
+        $html .= '<a href="' . $url . '" class="binrik-nmd-item-link"' . $target . '>';
 
         if ( $img_url ) {
             $img_style = '';
@@ -222,28 +222,28 @@ class MMB_Walker extends Walker_Nav_Menu {
             }
 
             $style_attr = $img_style ? ' style="' . $img_style . '"' : '';
-            $html .= '<img src="' . $img_url . '" alt="' . $label . '" class="mmb-item-img" loading="lazy"' . $style_attr . '>';
+            $html .= '<img src="' . $img_url . '" alt="' . $label . '" class="binrik-nmd-item-img" loading="lazy"' . $style_attr . '>';
         }
 
         if ( $label || $icon || $desc ) {
-            $html .= '<span class="mmb-item-content">';
+            $html .= '<span class="binrik-nmd-item-content">';
 
             if ( $icon ) {
-                $html .= '<i class="bi ' . $icon . ' mmb-item-icon"></i>';
+                $html .= '<i class="bi ' . $icon . ' binrik-nmd-item-icon"></i>';
             }
 
             if ( $label || $desc ) {
-                $html .= '<span class="mmb-item-text">';
+                $html .= '<span class="binrik-nmd-item-text">';
                 if ( $label ) {
-                    $html .= '<span class="mmb-item-label">' . $label;
+                    $html .= '<span class="binrik-nmd-item-label">' . $label;
                     if ( $badge ) {
-                        $html .= ' <span class="mmb-badge" style="background:' . $badge_clr . ';">' . $badge . '</span>';
+                        $html .= ' <span class="binrik-nmd-badge" style="background:' . $badge_clr . ';">' . $badge . '</span>';
                     }
                     $html .= '</span>';
                 }
 
                 if ( $desc ) {
-                    $html .= '<span class="mmb-item-desc">' . $desc . '</span>';
+                    $html .= '<span class="binrik-nmd-item-desc">' . $desc . '</span>';
                 }
                 $html .= '</span>';
             }

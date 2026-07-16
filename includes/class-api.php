@@ -1,14 +1,14 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class MMB_API {
+class Binrik_NMD_API {
 
     public function __construct() {
         add_action( 'rest_api_init', [ $this, 'register_routes' ] );
     }
 
     public function register_routes() {
-        $ns = 'mega-menu/v1';
+        $ns = 'binrik-nmd/v1';
 
         // Get all mega menu configurations
         register_rest_route( $ns, '/menus', [
@@ -58,7 +58,7 @@ class MMB_API {
     }
 
     public function get_menus() {
-        $menus = get_option( 'mmb_menus', [] );
+        $menus = get_option( 'binrik_nmd_menus', [] );
         return rest_ensure_response( $menus );
     }
 
@@ -74,7 +74,7 @@ class MMB_API {
         $menu_name = sanitize_text_field( $data['name'] ?? '' );
         $columns   = $this->sanitize_columns( $data['columns'] ?? [] );
 
-        $menus          = get_option( 'mmb_menus', [] );
+        $menus          = get_option( 'binrik_nmd_menus', [] );
         $menus[$menu_id] = [
             'id'         => $menu_id,
             'name'       => $menu_name,
@@ -84,7 +84,7 @@ class MMB_API {
             'updated_at' => current_time( 'mysql' ),
         ];
 
-        update_option( 'mmb_menus', $menus );
+        update_option( 'binrik_nmd_menus', $menus );
         return rest_ensure_response( [ 'success' => true, 'menu' => $menus[$menu_id] ] );
     }
 
@@ -150,9 +150,9 @@ class MMB_API {
 
     public function delete_menu( WP_REST_Request $request ) {
         $menu_id = sanitize_key( $request->get_param( 'id' ) );
-        $menus   = get_option( 'mmb_menus', [] );
+        $menus   = get_option( 'binrik_nmd_menus', [] );
         unset( $menus[$menu_id] );
-        update_option( 'mmb_menus', $menus );
+        update_option( 'binrik_nmd_menus', $menus );
         return rest_ensure_response( [ 'success' => true ] );
     }
 
